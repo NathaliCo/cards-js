@@ -1,0 +1,23 @@
+{
+  "name": "cards",
+  "version": "1.0.0",
+  "description": "Welcome to the cards-js readme, if you're reading this you're probably interested in working as a developer at PerfectPitchTech. We're excited to meet you, but first we have fun coding challenge for you to complete.",
+  "main": "app.js",
+  "dependencies": {
+    "deck-of-cards": "^0.1.8"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NathaliCo/cards-js.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NathaliCo/cards-js/issues"
+  },
+  "homepage": "https://github.com/NathaliCo/cards-js#readme"
+}

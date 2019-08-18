@@ -1,0 +1,57 @@
+.row{
+overflow-y:auto;
+position: relative;
+padding-bottom: 5rem;
+
+
+}
+
+.img{
+  max-width: 7rem;
+  height: auto;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+  position: absolute;
+}
+
+.col-3{
+    overflow: auto; 
+    color: whitesmoke;
+}
+
+.showCards{
+    height: 12rem;
+    width: auto;
+    padding-bottom: 1rem ;
+    text-align: center;
+    display:block;
+    margin:auto;
+}
+
+
+.play{
+    height: 20rem;
+    padding-top: 3rem;
+   text-align: center;
+   padding-bottom: 3rem ;
+}
+
+.title{
+    padding-top: 1rem;
+}
+body{
+    background-image: url("./black.png");
+    overflow-y: auto;
+
+}
+
+.card{
+   
+    display:block;
+    margin:auto;
+}
+
+#container{
+    top: 30%;
+    left: 50%;
+}

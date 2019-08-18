@@ -19,7 +19,7 @@ fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1').then(func
         document.querySelector(".spades").innerHTML= ``;  
         document.querySelector(".clubs").innerHTML= ``;  
 
-              delay = setInterval(deal,1)
+              delay = setInterval(deal,1000)
             })
         })
     })

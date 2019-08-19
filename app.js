@@ -15,7 +15,7 @@ const getDeck = async () => {
   dealButton.onclick = function() {
     location.reload();
   };
-  delayEachCard = setInterval(dealCards, 1);
+  delayEachCard = setInterval(dealCards, 1000);
 };
 
 let index = 0;

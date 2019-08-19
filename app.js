@@ -17,11 +17,8 @@ fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1').then(func
                 console.log(data)
             }).then (function(){
                 
-        document.querySelector(".diamonds").innerHTML= ``;  
-        document.querySelector(".hearts").innerHTML= ``;  
-        document.querySelector(".spades").innerHTML= ``;  
-        document.querySelector(".clubs").innerHTML= ``;  
-        startButton.style.visibility="hidden"
+        startButton.innerHTML="Play Again"
+        startButton.onclick = function() { location.reload(); }
         delay = setInterval(deal,1000)
            
             })

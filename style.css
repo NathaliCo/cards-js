@@ -1,49 +1,10 @@
-.row{
-overflow-y:auto;
-position: relative;
-padding-bottom: 5rem;
-
-
-}
-
-.img{
-  max-width: 7rem;
-  height: auto;
-  padding-bottom: 1rem;
-  padding-top: 1rem;
-  position: absolute;
-}
-
-.col-3{
-    overflow: auto; 
-    color: whitesmoke;
-    height: 90vh;
-}
-
-.showCards{
-    height: 12rem;
-    width: auto;
-    padding-bottom: 3rem ;
+*{
     text-align: center;
-    display:block;
-    margin:auto;
 }
 
-
-.play{
-    height: 20rem;
-    padding-top: 3rem;
-   text-align: center;
-   padding-bottom: 3rem ;
-}
-
-.title{
-    padding-top: 1rem;
-}
 body{
     background-image: url("./backblack.jpg");
     overflow-y: auto;
-
 }
 
 .card{
@@ -52,13 +13,60 @@ body{
     margin:auto;
 }
 
+.col-3{
+    overflow: auto; 
+    color: whitesmoke;
+    height: 90vh;
+}
+
 #container{
     top: 30%;
     left: 50%;
 }
 
-
 .icon{
     height: 80px;
     width: auto;
 }
+
+.img{
+    max-width: 7rem;
+    height: auto;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+    position: absolute;
+  }
+  
+  .play{
+    height: 20rem;
+    padding-top: 3rem;
+   padding-bottom: 3rem ;
+   position: relative;
+}
+  
+.row{
+overflow-y:auto;
+position: relative;
+padding-top: 5rem;
+position: relative;
+
+}
+
+.showCards{
+    height: 15rem;
+    width: auto;
+    padding-bottom: 3rem ;
+    text-align: center;
+    display:block;
+    margin:auto;
+}
+
+.title{
+    padding-top: 1rem;
+}
+
+
+
+
+
+

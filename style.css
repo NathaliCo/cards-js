@@ -1,5 +1,5 @@
 *{
-font-family: 'Acme', sans-serif;
+    font-family: 'Acme', sans-serif;
 
 }
 
@@ -45,16 +45,16 @@ body{
   .play{
     height: 20rem;
     padding-top: 3rem;
-   padding-bottom: 3rem ;
-   position: relative;
-   text-align: center;
+    padding-bottom: 3rem ;
+    position: relative;
+    text-align: center;
 }
   
 .row{
-overflow-y:auto;
-position: relative;
-padding-top: 5rem;
-position: relative;
+    overflow-y:auto;
+    position: relative;
+    padding-top: 5rem;
+    position: relative;
 
 }
 

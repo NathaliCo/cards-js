@@ -15,7 +15,7 @@ const getDeck = async () => {
   dealButton.onclick = function() {
     location.reload();
   };
-  delayEachCard = setInterval(dealCards, 1);
+  delayEachCard = setInterval(dealCards, 1000);
 };
 
 let index = 0;
@@ -65,17 +65,13 @@ const results = () => {
   spades.sort(sorter);
   clubs.sort(sorter);
 
-  const diamondsImages = saveImages(diamonds);
-  printCards(diamondsImages, "diamonds");
+  printCards(diamonds, "diamonds");
 
-  const heartsImages = saveImages(hearts);
-  printCards(heartsImages, "hearts");
+  printCards(hearts, "hearts");
 
-  const spadesImages = saveImages(spades);
-  printCards(spadesImages, "spades");
+  printCards(spades, "spades");
 
-  const clubsImages = saveImages(clubs);
-  printCards(clubsImages, "clubs");
+  printCards(clubs, "clubs");
 
   clearInterval(delayEachCard);
 };
@@ -111,18 +107,10 @@ function sorter(a, b) {
   return 0;
 }
 
-const saveImages = suit => {
-  let suitImages = [];
-  suit.forEach(element => {
-    suitImages.push(element.image);
-  });
-  return suitImages;
-};
-
 const printCards = (cards, suit) => {
   cards.forEach(element => {
     document.querySelector(
       "." + suit
-    ).innerHTML += `<br> <img class = "img" src=${element} />`;
+    ).innerHTML += `<br> <img class = "img" src=${element.image} />`;
   });
 };

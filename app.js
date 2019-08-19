@@ -2,6 +2,7 @@ let deckID;
 let dealButton = document.querySelector(".start");
 const API = "https://deckofcardsapi.com/api/deck/";
 let deck = [];
+let delay = "null"
 
 const getDeck = async () => {
   const response = await fetch(API + "new/shuffle/?deck_count=1");

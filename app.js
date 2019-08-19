@@ -1,143 +1,128 @@
 let deckID;
-let startButton = document.querySelector(".start")
+let dealButton = document.querySelector(".start");
+const API = "https://deckofcardsapi.com/api/deck/";
+let deck = [];
+let delay = "null"
 
-const getDeck= ()=>{
-fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1').then(function(response) {
-      if (response.status != 200) {
-        window.alert("Fail to get deck");
-        return;
-      }response.json().then(function(data) {
-        let api = data;
-         deckID = api.deck_id;fetch('https://deckofcardsapi.com/api/deck/'+deckID+'/draw/?count=52').then(function(response) {
-            if (response.status != 200) {
-              window.alert("Fail to get cards");
-              return;
-            }response.json().then(function(data) {
-                decks=data.cards;
-                console.log(data)
-            }).then (function(){
-                
-        startButton.innerHTML="Play Again"
-        startButton.onclick = function() { location.reload(); }
-        delay = setInterval(deal,1000)
-           
-            })
-        })
-    })
-})
-}
+const getDeck = async () => {
+  const response = await fetch(API + "new/shuffle/?deck_count=1");
+  const data = await response.json();
+  deckID = data.deck_id;
+  const responseCards = await fetch(API + deckID + "/draw/?count=52");
+  const deckCards = await responseCards.json();
+  deck = deckCards.cards;
+  dealButton.innerHTML = "Play Again";
+  dealButton.onclick = function() {
+    location.reload();
+  };
+  delayEachCard = setInterval(dealCards, 1);
+};
 
+let index = 0;
+dealButton.addEventListener("click", () => getDeck());
 
-let index =0;
-startButton.addEventListener("click", ()=>getDeck() );
+let hearts = [];
+let spades = [];
+let diamonds = [];
+let clubs = [];
+let queens = [];
 
-let decks=[];
-let hearts=[];
-let spades=[];
-let diamonds=[];
-let clubs =[];
-let queens =[];
-
-//Repartir cartas
-const deal = ()=>{
-    if (queens.length==4) { 
-     results();
+const dealCards = () => {
+  if (queens.length == 4) {
+    results();
+  } else {
+    if (deck[index].value == "QUEEN") {
+      queens.push(deck[index]);
     }
 
-        else{
-            if(decks[index].value=='QUEEN'){
-            queens.push(decks[index])
-         }
-    
-    save(decks[index], decks[index].suit)
-    document.querySelector(".showCards").src=decks[index].image
-        index++
-}
-}
+    saveSuits(deck[index], deck[index].suit);
+    document.querySelector(".showCards").src = deck[index].image;
+    index++;
+  }
+};
 
-//Guardas en su respectivo array
-const save=(card, key)=>{
-    switch (key) {
-        case 'DIAMONDS':
-            diamonds.push(card)
-            break;
-        case 'HEARTS':
-            hearts.push(card)
-            break;
-        case 'SPADES':
-            spades.push(card)
-            break
-        case 'CLUBS':
-            clubs.push(card)
-        default:
-            break;
-    }
-}
+const saveSuits = (card, key) => {
+  switch (key) {
+    case "DIAMONDS":
+      diamonds.push(card);
+      break;
+    case "HEARTS":
+      hearts.push(card);
+      break;
+    case "SPADES":
+      spades.push(card);
+      break;
+    case "CLUBS":
+      clubs.push(card);
+    default:
+      break;
+  }
+};
 
-//Mostar resultados finales
-const results =()=>{
-        diamonds.sort(sorter);
-        hearts.sort(sorter);
-        spades.sort(sorter);
-        clubs.sort(sorter);
+const results = () => {
+  diamonds.sort(sorter);
+  hearts.sort(sorter);
+  spades.sort(sorter);
+  clubs.sort(sorter);
 
-        const diamondsImages= saveImages(diamonds)
-        diamondsImages.forEach(element => {
-        document.querySelector(".diamonds").innerHTML+= `<br> <img class = "img" src=${element} />`;  
-        })        
-  
-        const heartsImages= saveImages(hearts) 
-        heartsImages.forEach(element => {
-          document.querySelector(".hearts").innerHTML+= `<br> <img class = "img" src=${element} />`;  
-          })        
-    
-        const spadesImages= saveImages(spades) 
-        spadesImages.forEach(element => {
-          document.querySelector(".spades").innerHTML+= `<br> <img class = "img" src=${element} />`;  
-          })        
-    
-        const clubsImages= saveImages(clubs) 
-        clubsImages.forEach(element => {
-          document.querySelector(".clubs").innerHTML+= `<br> <img class = "img" src=${element} />`;  
-          })        
+  const diamondsImages = saveImages(diamonds);
+  printCards(diamondsImages, "diamonds");
 
-          clearInterval(delay)
-    }
+  const heartsImages = saveImages(hearts);
+  printCards(heartsImages, "hearts");
 
-    //Ordenar resultados
+  const spadesImages = saveImages(spades);
+  printCards(spadesImages, "spades");
+
+  const clubsImages = saveImages(clubs);
+  printCards(clubsImages, "clubs");
+
+  clearInterval(delayEachCard);
+};
+
+const changeValue = (a, b) => {
+  if (b.value == "10") {
+    b.value = 10;
+  } else if (b.value == "JACK") {
+    b.value = 11;
+  } else if (b.value == "QUEEN") {
+    b.value = 12;
+  } else if (b.value == "QUEEN") {
+    b.value = 13;
+  } else if (b.value == "ACE") {
+    b.value = 14;
+  } else if (a.value == "10") {
+    a.value = 10;
+  } else if (a.value == "JACK") {
+    a.value = 11;
+  } else if (a.value == "QUEEN") {
+    a.value = 12;
+  } else if (a.value == "QUEEN") {
+    a.value = 13;
+  } else if (a.value == "ACE") {
+    a.value = 14;
+  }
+};
+
 function sorter(a, b) {
-    if (b.value=="10"){
-        b.value=10
-    }else if(b.value=="JACK"){
-        b.value=11
-    }else if(b.value=="QUEEN"){
-        b.value=12
-    }else if(b.value =="QUEEN"){
-        b.value=13
-    }else if (b.value== "ACE"){
-        b.value=14
-    }else if (a.value=="10"){
-        a.value=10
-    }else if(a.value=="JACK"){
-        a.value=11
-    }else if(a.value=="QUEEN"){
-        a.value=12
-    }else if(a.value =="QUEEN"){
-        a.value=13
-    }else if (a.value== "ACE"){
-        a.value=14
-    }
-    if (a.value < b.value) return -1;  
-    if (a.value > b.value) return 1;   
-    return 0; 
-  }
+  changeValue(a, b);
+  if (a.value < b.value) return -1;
+  if (a.value > b.value) return 1;
+  return 0;
+}
 
-  //Separar imágenes
-  const saveImages=(suit)=>{
-    let suitImages=[]
-    suit.forEach(element => {
-    suitImages.push(element.image)    
-});
-return suitImages
-  }
+const saveImages = suit => {
+  let suitImages = [];
+  suit.forEach(element => {
+    suitImages.push(element.image);
+  });
+  return suitImages;
+};
 
+const printCards = (cards, suit) => {
+  cards.forEach(element => {
+    document.querySelector(
+      "." + suit
+    ).innerHTML += `<br> <img class = "img" src=${element} />`;
+  });
+};

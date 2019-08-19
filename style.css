@@ -17,12 +17,13 @@ padding-bottom: 5rem;
 .col-3{
     overflow: auto; 
     color: whitesmoke;
+    height: 90vh;
 }
 
 .showCards{
     height: 12rem;
     width: auto;
-    padding-bottom: 1rem ;
+    padding-bottom: 3rem ;
     text-align: center;
     display:block;
     margin:auto;
@@ -40,7 +41,7 @@ padding-bottom: 5rem;
     padding-top: 1rem;
 }
 body{
-    background-image: url("./black.png");
+    background-image: url("./backblack.jpg");
     overflow-y: auto;
 
 }
@@ -57,3 +58,7 @@ body{
 }
 
 
+.icon{
+    height: 80px;
+    width: auto;
+}

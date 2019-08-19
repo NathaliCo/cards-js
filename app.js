@@ -1,4 +1,6 @@
 let deckID;
+let startButton = document.querySelector(".start")
+
 const getDeck= ()=>{
 fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1').then(function(response) {
       if (response.status != 200) {
@@ -14,12 +16,14 @@ fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1').then(func
                 decks=data.cards;
                 console.log(data)
             }).then (function(){
+                
         document.querySelector(".diamonds").innerHTML= ``;  
         document.querySelector(".hearts").innerHTML= ``;  
         document.querySelector(".spades").innerHTML= ``;  
         document.querySelector(".clubs").innerHTML= ``;  
-
-              delay = setInterval(deal,1000)
+        startButton.style.visibility="hidden"
+        delay = setInterval(deal,1000)
+           
             })
         })
     })
@@ -28,7 +32,7 @@ fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1').then(func
 
 
 let index =0;
-document.querySelector(".start").addEventListener("click", getDeck );
+startButton.addEventListener("click", ()=>getDeck() );
 
 let decks=[];
 let hearts=[];
@@ -99,8 +103,7 @@ const results =()=>{
         clubsImages.forEach(element => {
           document.querySelector(".clubs").innerHTML+= `<br> <img class = "img" src=${element} />`;  
           })        
-    
-       
+
           clearInterval(delay)
     }
 

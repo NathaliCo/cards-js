@@ -2,7 +2,8 @@ let deckID;
 let dealButton = document.querySelector(".start");
 const API = "https://deckofcardsapi.com/api/deck/";
 let deck = [];
-let delay = "null"
+let delay = "null";
+let delayEachCard = null;
 
 const getDeck = async () => {
   const response = await fetch(API + "new/shuffle/?deck_count=1");
@@ -12,10 +13,15 @@ const getDeck = async () => {
   const deckCards = await responseCards.json();
   deck = deckCards.cards;
   dealButton.innerHTML = "Play Again";
+
   dealButton.onclick = function() {
-    location.reload();
+    restart();
   };
-  delayEachCard = setInterval(dealCards, 1000);
+  if (delayEachCard == null) {
+    delayEachCard = setInterval(dealCards, 75);
+  }
+
+  dealButton.style.visibility = "hidden";
 };
 
 let index = 0;
@@ -29,12 +35,13 @@ let queens = [];
 
 const dealCards = () => {
   if (queens.length == 4) {
+    clearInterval(delayEachCard);
+    delayEachCard = null;
     results();
   } else {
     if (deck[index].value == "QUEEN") {
       queens.push(deck[index]);
     }
-
     saveSuits(deck[index], deck[index].suit);
     document.querySelector(".showCards").src = deck[index].image;
     index++;
@@ -60,6 +67,7 @@ const saveSuits = (card, key) => {
 };
 
 const results = () => {
+  dealButton.style.visibility = "visible";
   diamonds.sort(sorter);
   hearts.sort(sorter);
   spades.sort(sorter);
@@ -73,7 +81,26 @@ const results = () => {
 
   printCards(clubs, "clubs");
 
-  clearInterval(delayEachCard);
+  const shownCards =
+    diamonds.length + hearts.length + spades.length + clubs.length;
+  document.querySelector(".shown").innerHTML = shownCards + " Shown cards // ";
+  document.querySelector(".hidden").innerHTML =
+    52 - shownCards + " Hidden cards";
+
+  alerts(shownCards);
+};
+
+const alerts = shownCards => {
+  const alert = document.querySelector(".alert");
+
+  if (shownCards < 20) {
+    alert.innerHTML = " Today is you lucky day";
+  } else if (shownCards < 36) {
+    alert.innerHTML = "Good game";
+  } else {
+    alert.innerHTML = "Try again";
+  }
+  alert.style.display = "block";
 };
 
 const changeValue = (a, b) => {
@@ -114,3 +141,22 @@ const printCards = (cards, suit) => {
     ).innerHTML += `<br> <img class = "img" src=${element.image} />`;
   });
 };
+
+const restart = () => {
+    deckID = "";
+    hearts = [];
+    spades = [];
+    diamonds = [];
+    clubs = [];
+    queens = [];
+    deck = [];
+    index = 0;
+    document.querySelector(".diamonds").innerHTML = "";
+    document.querySelector(".hearts").innerHTML = "";
+    document.querySelector(".clubs").innerHTML = "";
+    document.querySelector(".spades").innerHTML = "";
+    document.querySelector(".shown").innerHTML = "";
+    document.querySelector(".hidden").innerHTML = "";
+    document.querySelector(".alert").style.display= "none";
+    getDeck();
+  };

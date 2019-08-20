@@ -7,7 +7,7 @@
     text-align: center;
 }
 body{
-    background-image: url("./assets/backblack.jpg");
+    background-image: url("../assets/backblack.jpg");
     overflow-y: auto;
 }
  button{

@@ -18,20 +18,15 @@ const getDeck = async () => {
     restart();
   };
   if (delayEachCard == null) {
-    delayEachCard = setInterval(dealCards, 75);
+    delayEachCard = setInterval(dealCards, 1000);
   }
 
   dealButton.style.visibility = "hidden";
 };
 
-let index = 0;
 dealButton.addEventListener("click", () => getDeck());
 
-let hearts = [];
-let spades = [];
-let diamonds = [];
-let clubs = [];
-let queens = [];
+let index = 0;
 
 const dealCards = () => {
   if (queens.length == 4) {
@@ -48,6 +43,11 @@ const dealCards = () => {
   }
 };
 
+let hearts = [];
+let spades = [];
+let diamonds = [];
+let clubs = [];
+let queens = [];
 const saveSuits = (card, key) => {
   switch (key) {
     case "DIAMONDS":
@@ -110,7 +110,7 @@ const changeValue = (a, b) => {
     b.value = 11;
   } else if (b.value == "QUEEN") {
     b.value = 12;
-  } else if (b.value == "QUEEN") {
+  } else if (b.value == "KING") {
     b.value = 13;
   } else if (b.value == "ACE") {
     b.value = 14;
@@ -120,7 +120,7 @@ const changeValue = (a, b) => {
     a.value = 11;
   } else if (a.value == "QUEEN") {
     a.value = 12;
-  } else if (a.value == "QUEEN") {
+  } else if (a.value == "KING") {
     a.value = 13;
   } else if (a.value == "ACE") {
     a.value = 14;
@@ -143,20 +143,20 @@ const printCards = (cards, suit) => {
 };
 
 const restart = () => {
-    deckID = "";
-    hearts = [];
-    spades = [];
-    diamonds = [];
-    clubs = [];
-    queens = [];
-    deck = [];
-    index = 0;
-    document.querySelector(".diamonds").innerHTML = "";
-    document.querySelector(".hearts").innerHTML = "";
-    document.querySelector(".clubs").innerHTML = "";
-    document.querySelector(".spades").innerHTML = "";
-    document.querySelector(".shown").innerHTML = "";
-    document.querySelector(".hidden").innerHTML = "";
-    document.querySelector(".alert").style.display= "none";
-    getDeck();
-  };
+  deckID = "";
+  hearts = [];
+  spades = [];
+  diamonds = [];
+  clubs = [];
+  queens = [];
+  deck = [];
+  index = 0;
+  document.querySelector(".diamonds").innerHTML = "";
+  document.querySelector(".hearts").innerHTML = "";
+  document.querySelector(".clubs").innerHTML = "";
+  document.querySelector(".spades").innerHTML = "";
+  document.querySelector(".shown").innerHTML = "";
+  document.querySelector(".hidden").innerHTML = "";
+  document.querySelector(".alert").style.display = "none";
+  getDeck();
+};
